@@ -29,6 +29,24 @@ const Modal = ({mode,setShowModal,task,getData}) => {
     }
   }
 
+  const editData=async(e)=>{
+    e.preventDefault();
+    try{
+      const response=await fetch(`http://localhost:8002/todos/${task.id}`,{
+        method:"PUT",
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+      })
+      if(response.status===200){
+        console.log('Update works!!');
+        setShowModal(false);
+        getData();
+      }
+    }catch(error){
+      console.error(error);
+    }
+  }
+
  
   const handleChange=(e)=>{
     const{name,value}=e.target;
@@ -53,7 +71,7 @@ const Modal = ({mode,setShowModal,task,getData}) => {
             <label for="range">Drag to select your current progress</label>
             <input type ="range" id="range" min="0" max="100" 
             name="progress" value={data.progress} onChange={handleChange} required/>
-            <input className={mode} type="submit" id="submit" onClick={editMode? '':postData}/>
+            <input className={mode} type="submit" id="submit" onClick={editMode? editData:postData}/>
           </form>
         </div>    
       </div>
