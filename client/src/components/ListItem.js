@@ -10,7 +10,7 @@ const ListItem = ({task})=> {
           <ProgressBar/>
         </div>
 
-        <div class="button-container">
+        <div className="button-container">
           <button className="edit">EDIT</button>
           <button className="delete">DELETE</button>
 
