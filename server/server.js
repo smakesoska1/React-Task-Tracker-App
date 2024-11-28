@@ -64,5 +64,12 @@ app.delete('/todos/:id',async(req,res)=>{
         console.error(error);
     }
 })
+
+//signup
+
+
+//login
+
+
 app.listen(PORT, ()=>console.log(`Server running on port ${PORT}`));
 

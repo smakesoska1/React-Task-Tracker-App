@@ -12,6 +12,16 @@ const Auth = ()=> {
     setIsLogIn(status);
     
   }
+
+  const handleSubmit=async(e,endpoint)=>{
+    e.preventDefault();
+    if(!isLogIn && password!== confirmPassword){
+      setError('Make sure you enter the same password!');
+      return
+    }
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/${endpoint}`)
+
+  }
     return (
       <div className="auth-container">
         <div className="auth-container-box">
@@ -20,7 +30,7 @@ const Auth = ()=> {
             <input type="email" placholder="Enter your e-mail adress"/>
             <input type="password" placeholder="Enter your password"/>
             {!isLogIn && <input type="password" placeholder="Confirm your password"/>}
-            <input type="submit" className="create"/>
+            <input type="submit" className="create" onClick={(e)=>handleSubmit(e,isLogIn? 'login':'signup')}/>
             {error && <p>{error}</p>}
           </form>
           <div className="auth-options">
