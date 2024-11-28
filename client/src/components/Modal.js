@@ -47,7 +47,6 @@ const Modal = ({mode,setShowModal,task,getData}) => {
     }
   }
 
- 
   const handleChange=(e)=>{
     const{name,value}=e.target;
     setData(data => ({
