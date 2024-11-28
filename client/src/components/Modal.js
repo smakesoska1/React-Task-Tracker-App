@@ -1,15 +1,30 @@
 import {useState} from 'react';
 
 
-const Modal = ({mode,setShowModal}) => {
+const Modal = ({mode,setShowModal,task}) => {
  
   const editMode=mode==="edit" ? true: false;
   const[data,setData]=useState({
-    user_email:"",
-    title:"",
-    progress:"",
-    date: editMode? "": new Date()
+    user_email:editMode? task.user_email: 'bob@gmail.com',
+    title:editMode? task.title: '',
+    progress:editMode? task.progress: 50,
+    date: editMode? task.date : new Date(),
   });
+
+  const postData=async(e)=>{
+    e.preventDefault();
+    try{
+      const response=await fetch('http://localhost:8002/todos/',{
+        method:"POST",
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+    });
+    const result = await response.json();
+    console.log(result);
+    }catch(error){
+      console.error(error);
+    }
+  }
 
  
   const handleChange=(e)=>{
@@ -35,7 +50,7 @@ const Modal = ({mode,setShowModal}) => {
             <label for="range">Drag to select your current progress</label>
             <input type ="range" id="range" min="0" max="100" 
             name="progress" value={data.progress} onChange={handleChange} required/>
-            <input className={mode} type="submit" id="submit"/>
+            <input className={mode} type="submit" id="submit" onClick={editMode? '':postData}/>
           </form>
         </div>    
       </div>
