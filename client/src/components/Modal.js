@@ -1,11 +1,11 @@
 import {useState} from 'react';
 
 
-const Modal = ({mode,setShowModal,task}) => {
+const Modal = ({mode,setShowModal,task,getData}) => {
  
   const editMode=mode==="edit" ? true: false;
   const[data,setData]=useState({
-    user_email:editMode? task.user_email: 'bob@gmail.com',
+    user_email:editMode? task.user_email: 'sara_mdz@gmail.com',
     title:editMode? task.title: '',
     progress:editMode? task.progress: 50,
     date: editMode? task.date : new Date(),
@@ -19,8 +19,11 @@ const Modal = ({mode,setShowModal,task}) => {
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(data)
     });
-    const result = await response.json();
-    console.log(result);
+   if(response.status===200){
+    console.log('Radi');
+    setShowModal(false);
+    getData();
+   }
     }catch(error){
       console.error(error);
     }
