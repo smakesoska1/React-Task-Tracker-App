@@ -14,7 +14,7 @@ const Modal = ({mode,setShowModal,task,getData}) => {
   const postData=async(e)=>{
     e.preventDefault();
     try{
-      const response=await fetch('http://localhost:8002/todos/',{
+      const response=await fetch(`${process.env.REACT_APP_SERVER_URL}/todos/`,{
         method:"POST",
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(data)
@@ -32,7 +32,7 @@ const Modal = ({mode,setShowModal,task,getData}) => {
   const editData=async(e)=>{
     e.preventDefault();
     try{
-      const response=await fetch(`http://localhost:8002/todos/${task.id}`,{
+      const response=await fetch(`${process.env.REACT_APP_SERVER_URL}/todos/${task.id}`,{
         method:"PUT",
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(data)
@@ -46,6 +46,7 @@ const Modal = ({mode,setShowModal,task,getData}) => {
       console.error(error);
     }
   }
+
 
   const handleChange=(e)=>{
     const{name,value}=e.target;
