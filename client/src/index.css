@@ -204,3 +204,27 @@ input{
 
 }
 
+.user-email{
+    float:auto;
+    font-size:14px;
+    margin:10px;
+    color:rgb(103, 93, 93);
+}
+
+.outer-bar{
+    width:200px;
+    height:20px;
+    background-color:rgb(216,216,216);
+    border-radius: 15px;
+    overflow:hidden;
+    
+}
+
+.inner-bar{
+    height:20px;
+}
+
+.task-title{
+    width:190px;
+}
+
